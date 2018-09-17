@@ -58,41 +58,42 @@
                             <a href="#usersSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Users</a> 
                             <ul class="collapse list-unstyled" style="background-color:#D0D9EB;" id="usersSubmenu">
                                 <li>
-                                    <a href="~/Views/UserForm.aspx">Create User</a>
+                                    <a href="UserForm.aspx">Create User</a>
                                 </li>
                                 <li>
-                                    <a href="~/Views/UsersTable.aspx">User Table</a>
+                                    <a href="UsersTable.aspx">User Table</a>
                                 </li>
                             </ul>
 
                     </li>
                     <li>
-                        <a href="CustomerTable.aspx" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Customers</a>
+                        <a href="#customerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Customers</a>
                         <ul class="collapse list-unstyled" id="customerSubmenu">
                             <li>
-                                <a href="~/Views/CustomerForm.aspx">Create Customer</a>
+                                <a href="CustomerForm.aspx">Create Customer</a>
                             </li>
                             <li>
-                                <a href="~/Views/CustomerTable.aspx">Customer Table</a>
+                                <a href="CustomersTable.aspx">Customer Table</a>
                             </li>
                         </ul>
                     </li>
                     <li >
-                        <a href="JobsTable.aspx" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Jobs</a>
-                        <ul class="collapse list-unstyled" id="JobsSubmenu">
+                        <a href="#jobsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Jobs</a>
+                        <ul class="collapse list-unstyled" id="jobsSubmenu">
                             <li>
-                                <a href="~/Views/JobForm.aspx">Create Customer</a>
+                                <a href="TransactionTable.aspx">Transactions Table</a>
                             </li>
                             <li>
-                                <a href="~/Views/JobsTable.aspx">Customer Table</a>
+                                <a href="JobsTable.aspx">Jobs Table</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
 
             </nav>
-        
+
             <div id="content-wrapper">
+            <asp:Button ID="logoutButton" runat="server" Text="Log Out" style="visibility:hidden"  CausesValidation="false" OnClick="Logout_Click" />
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <div class="container-fluid">
                         <button type="button" id="sidebarCollapse" class="btn btn-info">

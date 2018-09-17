@@ -40,54 +40,55 @@ namespace Capstone_Final.Views
                             Response.Redirect("AJAXMain.aspx");
                             break;
                     }
-                }
 
 
-                if ((!IsPostBack) && Request.QueryString["jobID"] != null)
-                {
 
-                    createButton.Visible = false;
-                    updateButton.Visible = true;
-                    deleteButton.Visible = true;
-                    string jobID = Request.QueryString["jobID"].ToString();
-                    jobIDBox.Text = jobID;
-                    Jobs job = new Jobs();
-                    string result = Database.LocateJob(Convert.ToInt32(jobID), out job);
-
-                    while (job != null)
+                    if ((!IsPostBack) && Request.QueryString["jobID"] != null)
                     {
-                        jobIDBox.Text = job.JobID.ToString();
-                        customerIDBox.Text = job.CustomerID.ToString();
-                        startDatePicker.SelectedDate = job.StartDate;
-                        estimatedCompletionDatePicker.SelectedDate = job.EstimatedCompletionDate;
-                        completionDatePicker.SelectedDate = job.CompletionDate;
-                        estimatedCostBox.Text = job.EstimatedJobCost.ToString();
-                        completedCostBox.Text = job.CompletedJobCost.ToString();
-                        streetBox.Text = job.Street;
-                        cityBox.Text = job.City;
-                        stateBox.Text = job.State;
-                        zipBox.Text = job.Zip;
+                        if (Request.QueryString["jobID"] != null)
+                        {
+                            createButton.Visible = false;
+                            updateButton.Visible = true;
+                            deleteButton.Visible = true;
+                            string jobID = Request.QueryString["jobID"].ToString();
+                            jobIDBox.Text = jobID;
+                            Jobs job = new Jobs();
+                            string result = Database.LocateJob(Convert.ToInt32(jobID), out job);
 
+                            if (job != null)
+                            {
+                                jobIDBox.Text = job.JobID.ToString();
+                                customerIDBox.Text = job.CustomerID.ToString();
+                                startDatePicker.SelectedDate = job.StartDate;
+                                estimatedCompletionDatePicker.SelectedDate = job.EstimatedCompletionDate;
+                                completionDatePicker.SelectedDate = job.CompletionDate;
+                                estimatedCostBox.Text = job.EstimatedJobCost.ToString();
+                                completedCostBox.Text = job.CompletedJobCost.ToString();
+                                streetBox.Text = job.Street;
+                                cityBox.Text = job.City;
+                                stateBox.Text = job.State;
+                                zipBox.Text = job.Zip;
+
+                            }
+                        }
+
+                    }
+                    else if ((!IsPostBack) && Request.QueryString["customerID"] != null)
+                    {
+                        string customerID = Request.QueryString["customerID"];
+                        customerIDBox.Text = customerID;
                     }
                 }
                 else
                 {
                     Response.Redirect("Login.aspx");
                 }
-
             }
+            else
+                Response.Redirect("Login.aspx");
         }
-        /*         private int jobID;
-private int customerID;
-private string street;
-private string city;
-private string state;
-private string zip;
-private DateTime startDate;
-private DateTime estimatedCompletionDate;
-private DateTime completionDate;
-private double estimatedJobCost;
-private double completedJobCost;*/
+
+
         protected void CreateButton_Click(object sender, EventArgs e)
         {
             Users currentUser = (Users)Session["CurrentUser"];
@@ -104,6 +105,7 @@ private double completedJobCost;*/
                 job.Zip = zipBox.Text;
                 job.EstimatedJobCost = double.Parse(estimatedCostBox.Text);
                 job.CompletedJobCost = double.Parse(completedCostBox.Text);
+                job.CustomerID = Int32.Parse(customerIDBox.Text);
 
                 if (!job.ErrorMessages.Contains("ERROR:"))
                 {

@@ -15,7 +15,10 @@ namespace Capstone_Final.Models
     {
         private static string ConnString()
         {
-            return "Server=sql.neit.edu,4500;Database=se245_jhawkins;User Id=se245_jhawkins;password=000920011;"; //connection string
+            //capstonefinal.database.windows.net
+            //jhawkins
+            //Serverpass1!
+            return "Server=capstonefinal.database.windows.net;Database=CapstoneFinal;User Id=jhawkins;password=Serverpass1!;"; //connection string
 
         }
         #region User Methods
@@ -24,15 +27,17 @@ namespace Capstone_Final.Models
         {
             string attempt = string.Empty;
             string hashedPassword = string.Empty;
-            string salt = Crypto.GenerateSalt();
+            user.Salt = Crypto.GenerateSalt();
+            string pass = Crypto.GenerateSalt();
 
-            hashedPassword = Crypto.HashPassword(salt + user.Password);
 
+            hashedPassword = Crypto.HashPassword(user.Salt + user.Password);
+            int count = hashedPassword.Length;
             SqlConnection conn = new SqlConnection();
 
             conn.ConnectionString = ConnString();
 
-            string sqlString = "INSERT INTO Users (firstName, lastName, accountName, password, salt, role, creationDate, passwordResetFlag) VALUES (@firstName, @lastName, @accountName, @password, @salt, @role, @creationDate, @passwordResetFlag)"; //SQL insert
+            string sqlString = "INSERT INTO Users (firstName, lastName, accountName, password, salt, role, creationDate, passwordResetFlag, email) VALUES (@firstName, @lastName, @accountName, @password, @salt, @role, @creationDate, @passwordResetFlag, @email)"; //SQL insert
 
             SqlCommand comm = new SqlCommand();
             comm.CommandText = sqlString;
@@ -46,7 +51,8 @@ namespace Capstone_Final.Models
             comm.Parameters.AddWithValue("@salt", user.Salt);
             comm.Parameters.AddWithValue("@Role", user.Role);
             comm.Parameters.AddWithValue("@CreationDate", DateTime.Now);
-            comm.Parameters.AddWithValue("@passwordResetFlag", true);
+            comm.Parameters.AddWithValue("@passwordResetFlag", DBNull.Value);
+            comm.Parameters.AddWithValue("@email", user.Email);
 
 
 
@@ -120,7 +126,8 @@ namespace Capstone_Final.Models
             catch (Exception ex)
             {
             }
-
+            userSet.Tables[0].Columns.Remove("password");
+            userSet.Tables[0].Columns.Remove("salt");
             return userSet;
         }
     
@@ -356,7 +363,7 @@ namespace Capstone_Final.Models
         {
             Int32 record = 0;
             string result = string.Empty;
-            string sqlCommand = "UPDATE Users SET firstName = @firstName, lastName = @lastName, role = @role, passwordResetFlag = @passwordResetFlag";
+            string sqlCommand = "UPDATE Users SET firstName = @firstName, lastName = @lastName, role = @role, passwordResetFlag = @passwordResetFlag, email = @email";
  
             SqlConnection conn = new SqlConnection();
 
@@ -371,6 +378,7 @@ namespace Capstone_Final.Models
             comm.Parameters.AddWithValue("@lastName", user.LastName);
             comm.Parameters.AddWithValue("@role", user.Role);
             comm.Parameters.AddWithValue("@passwordResetFlag", user.PasswordResetFlag);
+            comm.Parameters.AddWithValue("@email", user.Email);
 
             try
             {

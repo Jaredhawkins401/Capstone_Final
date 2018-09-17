@@ -28,6 +28,7 @@
             <asp:BoundField DataField="email" HeaderText="Email" />
                 
      <asp:HyperLinkField DataNavigateUrlFields="customerID" DataNavigateUrlFormatString="CustomerForm.aspx?customerID={0}" Text="Edit" />
+     <asp:HyperLinkField DataNavigateUrlFields="customerID" DataNavigateUrlFormatString="JobForm.aspx?customerID={0}" Text="Create Job" />
             </Columns>
         </asp:GridView>
         <asp:Button ID="SearchButton" runat="server" OnClick="SearchButton_Click" Text="Search" />

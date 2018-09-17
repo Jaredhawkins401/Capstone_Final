@@ -14,6 +14,7 @@ namespace Capstone_Final.Views
         {
             if (Session["LoggedIn"] != null && Session["LoggedIn"].ToString() == "TRUE")
             {
+
                 if (Session["CurrentUser"] != null)
                 {
                     Users currentUser = (Users)Session["CurrentUser"];
@@ -45,7 +46,7 @@ namespace Capstone_Final.Views
             }
             else
             {
-                Response.Redirect("~/Views/Login.aspx");
+                Response.Redirect("Login.aspx");
             }
         }
     }

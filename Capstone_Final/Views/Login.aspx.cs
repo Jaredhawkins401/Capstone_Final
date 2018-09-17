@@ -17,19 +17,16 @@ namespace Capstone_Final.Views
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            string username = string.Empty;
-            string password = string.Empty;
 
-            password = Request.Form["userPassBox"];
-            username = Request.Form["userNameBox"];
+            string username = userNameBox.Text;
+            string password = userPassBox.Text;
             Users user = new Users();
             string errors = string.Empty;
 
             Database.SearchUser(username, out user);
-
             if (Crypto.VerifyHashedPassword(user.Password, user.Salt + password))
             {
-                Session["LoggedIn"] = true;
+                Session["LoggedIn"] = "TRUE";
                 Session["CurrentUser"] = user;
                 Response.Redirect("~/Views/AJAXMain.aspx");
             }

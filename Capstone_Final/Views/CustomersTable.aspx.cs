@@ -13,7 +13,6 @@ namespace Capstone_Final.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (Session["LoggedIn"] != null && Session["LoggedIn"].ToString() == "TRUE")
             {
                 if (Session["CurrentUser"] != null)
@@ -59,6 +58,7 @@ namespace Capstone_Final.Views
 
             DataSet ds = Database.SearchCustomers(searchBox.Text, columnBox.SelectedValue);
 
+            customerView.AutoGenerateColumns = false;
             customerView.DataSource = ds;
             customerView.DataMember = ds.Tables[0].TableName;
             customerView.DataBind();

@@ -105,14 +105,14 @@ namespace Capstone_Final.Models
 
         public static bool ProfanityChecker(string value)
         {
-            bool is_bad = false;
+            bool is_bad = true;
 
             string[] profanities = { "SHIT", "FUCK", "ASSHOLE", "NAZI", "69", "HITLER", "HIMMLER", "COCK", "DICK", "POOP" };
 
             foreach (string word in profanities)
                 if (value.Contains(word))
                 {
-                    is_bad = true;
+                    is_bad = false;
                 }
 
             return is_bad;

@@ -20,13 +20,16 @@
 
         <asp:GridView ID="jobView" runat="server" >
             <Columns>
-                <asp:BoundField DataField="name" HeaderText="Name" />
-                <asp:BoundField DataField="lives" HeaderText="Lives" />
-                <asp:BoundField DataField="hoursplayed" HeaderText="Hours Played" />
-                <asp:BoundField DataField="health" HeaderText="HP" />
-                <asp:BoundField DataField="strength" HeaderText="Strength" />
-                <asp:BoundField DataField="armor" HeaderText="Armor" />
-                <asp:BoundField DataField="playingsince" HeaderText="Playing Since" />
+                <asp:BoundField DataField="startDate" HeaderText="Start Date" dataformatstring="{0:MMMM d, yyyy}" htmlencode="false"/>
+                <asp:BoundField DataField="estimatedCompletionDate" HeaderText="Estimated Completion Date" dataformatstring="{0:MMMM d, yyyy}" htmlencode="false" />
+                <asp:BoundField DataField="completionDate" HeaderText="Completion Date" dataformatstring="{0:MMMM d, yyyy}" htmlencode="false" />
+                <asp:BoundField DataField="estimatedJobCost" HeaderText="Estimated Job Cost" />
+                <asp:BoundField DataField="completedJobCost" HeaderText="Completed Job Cost" />
+                <asp:BoundField DataField="street" HeaderText="Street" />
+                <asp:BoundField DataField="city" HeaderText="City" />
+                <asp:BoundField DataField="state" HeaderText="State" />
+                <asp:BoundField DataField="zip" HeaderText="zip" />
+                <asp:BoundField DataField="email" HeaderText="E-mail" />
                 
                 <asp:HyperLinkField DataNavigateUrlFields="jobID" DataNavigateUrlFormatString="JobsForm.aspx?jobID={0}" Text="Edit" />
                 <asp:HyperLinkField DataNavigateUrlFields="jobID" DataNavigateUrlFormatString="TransactionForm.aspx?jobID={0}" Text="Create Transaction" />

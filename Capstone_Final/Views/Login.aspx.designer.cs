@@ -13,6 +13,15 @@ namespace Capstone_Final.Views {
     public partial class Login {
         
         /// <summary>
+        /// userNameLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label userNameLabel;
+        
+        /// <summary>
         /// userNameBox control.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace Capstone_Final.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label nameErrors;
+        
+        /// <summary>
+        /// passwordLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label passwordLabel;
         
         /// <summary>
         /// userPassBox control.

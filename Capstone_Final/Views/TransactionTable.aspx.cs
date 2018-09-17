@@ -59,6 +59,7 @@ namespace Capstone_Final.Views
 
             DataSet ds = Database.SearchTransactions(searchBox.Text, columnBox.SelectedValue);
 
+            transactionView.AutoGenerateColumns = false; 
             transactionView.DataSource = ds;
             transactionView.DataMember = ds.Tables[0].TableName;
             transactionView.DataBind();

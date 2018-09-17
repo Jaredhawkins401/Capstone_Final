@@ -21,7 +21,7 @@
 
     <!-- Email Text Box -->
     <asp:Label ID="emailLabel" runat="server" Text="E-mail" Style="display: block"></asp:Label>
-    <asp:TextBox ID="emailBox" runat="server" Style="display: block" MaxLength="20"></asp:TextBox>
+    <asp:TextBox ID="emailBox" runat="server" Style="display: block" MaxLength="40"></asp:TextBox>
     <asp:RequiredFieldValidator ID="emailValid" runat="server" ControlToValidate="emailBox" ErrorMessage="E-mail is required" />
 
     <!-- Role -->

@@ -18,7 +18,7 @@ namespace Capstone_Final.Models
         private DateTime completionDate;
         private double estimatedJobCost;
         private double completedJobCost;
-        private string errorMessages;
+        private string errorMessages = string.Empty;
 
         public int JobID
         {

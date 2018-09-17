@@ -66,6 +66,15 @@ namespace Capstone_Final.Views
                         passwordResetBox.Checked = true;
                     }
 
+                    if (user != null)
+                    {
+                        accountNameBox.Text = user.AccountName;
+                        fNameBox.Text = user.FirstName;
+                        lNameBox.Text = user.LastName;
+                        emailBox.Text = user.Email;
+                        roleBox.Text = user.Role.ToString();
+                    }
+
 
                 }
             }

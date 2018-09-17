@@ -41,38 +41,36 @@ namespace Capstone_Final.Views
                             Response.Redirect("AJAXMain.aspx");
                             break;
                     }
-                }
-                if ((!IsPostBack) && Request.QueryString["customerID"] != null)
-                {
 
-                    createButton.Visible = false;
-                    updateButton.Visible = true;
-                    deleteButton.Visible = true;
-                    string customerID = Request.QueryString["customerID"].ToString();
-                    customerIDBox.Text = customerID;
-
-
-                    Customers customer = new Customers();
-                    string result = Database.LocateCustomer(Convert.ToInt32(customerID), out customer);
-
-                    while (customer != null)
+                    if ((!IsPostBack) && Request.QueryString["customerID"] != null)
                     {
-                        customerIDBox.Text = customer.CustomerID.ToString();
-                        fNameBox.Text = customer.FirstName;
-                        lNameBox.Text = customer.LastName;
-                        streetBox.Text = customer.Street;
-                        cityBox.Text = customer.City;
-                        stateBox.Text = customer.State;
-                        zipBox.Text = customer.Zip;
-                        emailBox.Text = customer.Email;
+
+                        createButton.Visible = false;
+                        updateButton.Visible = true;
+                        deleteButton.Visible = true;
+                        string customerID = Request.QueryString["customerID"].ToString();
+                        customerIDBox.Text = customerID;
+
+
+                        Customers customer = new Customers();
+                        string result = Database.LocateCustomer(Convert.ToInt32(customerID), out customer);
+
+                        if (customer != null)
+                        {
+                            customerIDBox.Text = customer.CustomerID.ToString();
+                            fNameBox.Text = customer.FirstName;
+                            lNameBox.Text = customer.LastName;
+                            streetBox.Text = customer.Street;
+                            cityBox.Text = customer.City;
+                            stateBox.Text = customer.State;
+                            zipBox.Text = customer.Zip;
+                            emailBox.Text = customer.Email;
+                        }
                     }
                 }
-                else
-                {
-                    Response.Redirect("Login.aspx");
-                }
-                
             }
+            else
+                Response.Redirect("LoginForm.aspx");
         }
 
         protected void CreateButton_Click(object sender, EventArgs e)

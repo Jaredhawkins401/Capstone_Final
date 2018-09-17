@@ -21,7 +21,7 @@
                 <asp:BoundField DataField="lastName" HeaderText="Last Name" />
                 <asp:BoundField DataField="role" HeaderText="Role" />
                 <asp:BoundField DataField="email" HeaderText="Email" />
-                <asp:BoundField DataField="creationDate" HeaderText="Creation Date" ReadOnly="true" />
+                <asp:BoundField DataField="creationDate" HeaderText="Creation Date" ReadOnly="true"  dataformatstring="{0:MMMM d, yyyy}" htmlencode="false" />
                 
                 <asp:HyperLinkField DataNavigateUrlFields="userID" DataNavigateUrlFormatString="UserForm.aspx?userID={0}" Text="Edit" />
             </Columns>

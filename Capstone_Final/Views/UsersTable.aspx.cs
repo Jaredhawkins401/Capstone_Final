@@ -59,6 +59,7 @@ namespace Capstone_Final.Views
         {
             DataSet ds = Database.SearchUser(searchBox.Text, columnBox.SelectedValue);
 
+            userView.AutoGenerateColumns = false;
             userView.DataSource = ds;
             userView.DataMember = ds.Tables[0].TableName;
             userView.DataBind();

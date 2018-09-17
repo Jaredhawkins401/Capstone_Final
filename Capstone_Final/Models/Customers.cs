@@ -15,7 +15,7 @@ namespace Capstone_Final.Models
         private string state;
         private string zip;
         private string email;
-        private string errorMessages;
+        private string errorMessages = string.Empty;
 
         public int CustomerID
         {

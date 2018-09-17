@@ -13,7 +13,7 @@ namespace Capstone_Final.Models
         private double payment;
         private double originalJobCost;
         private double newJobCost;
-        private string errorMessages;
+        private string errorMessages = string.Empty;
 
         public int TransactionID
         {

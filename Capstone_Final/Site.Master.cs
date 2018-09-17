@@ -12,7 +12,16 @@ namespace Capstone_Final
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["LoggedIn"] != null && Session["LoggedIn"].ToString() == "TRUE")
+            {
+                logoutButton.Style["Visibility"] = "visible";
+            }
+        }
 
+        protected void Logout_Click(object sender, EventArgs e)
+        {
+            Session.Abandon();
+            Response.Redirect("/Default.aspx");
         }
     }
 }

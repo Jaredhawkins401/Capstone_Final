@@ -17,7 +17,7 @@ namespace Capstone_Final.Models
         private int role;
         private DateTime creationDate;
         private bool passwordResetFlag;
-        private string errorMessages;
+        private string errorMessages = string.Empty;
 
 
         public int UserID

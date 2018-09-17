@@ -58,6 +58,7 @@ namespace Capstone_Final.Views
         {
             DataSet ds = Database.SearchJob(searchBox.Text, columnBox.SelectedValue);
 
+            jobView.AutoGenerateColumns = false;
             jobView.DataSource = ds;
             jobView.DataMember = ds.Tables[0].TableName;
             jobView.DataBind();
