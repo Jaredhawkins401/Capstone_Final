@@ -7,35 +7,94 @@ namespace Capstone_Final.Models
 {
     public class Users
     {
-        private int id;
-        private string name;
+        private int userID;
+        private string firstName;
+        private string lastName;
+        private string accountName;
+        private string email;
+        private string password;
+        private string salt;
         private int role;
         private DateTime creationDate;
+        private bool passwordResetFlag;
         private string errorMessages;
 
-        public int ID
+
+        public int UserID
         {
             get
             {
-                return id;
+                return userID;
             }
             set
             {
-                id = value;
+                userID = value;
             }
         }
 
-        public string Name
+
+        public string FirstName
         {
             get
             {
-                return name;
+                return firstName;
             }
             set
             {
-                name = value;
+                if(GeneralTools.NotEmptyOrNull(value) && GeneralTools.ProfanityChecker(value))
+                    firstName = value;
+                else
+                    errorMessages += "\n ERROR: Name entered is invalid with profanity";
             }
         }
+
+        public string LastName
+        {
+            get
+            {
+                return lastName;
+            }
+            set
+            {
+                if (GeneralTools.NotEmptyOrNull(value) && GeneralTools.ProfanityChecker(value))
+                    lastName = value;
+                else
+                    errorMessages += "\n ERROR: Name entered is invalid with profanity";
+            }
+        }
+
+
+
+        public string AccountName
+        {
+            get
+            {
+                return accountName;
+            }
+            set
+            {
+                if (GeneralTools.NotEmptyOrNull(value) && GeneralTools.ProfanityChecker(value))
+                    accountName = value;
+                else
+                    errorMessages += "\n ERROR: Name entered is invalid with profanity";
+            }
+        }
+
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+            set
+            {
+                if (GeneralTools.EmailValidity(value) && GeneralTools.NotEmptyOrNull(value))
+                    email = value;
+                else
+                    errorMessages += "\n ERROR: E-mail entered is invalid, try again.";
+            }
+        }
+
 
         public int Role
         {
@@ -45,10 +104,15 @@ namespace Capstone_Final.Models
             }
             set
             {
-                role = value;
+                if(GeneralTools.NotEmptyOrNull(value))
+                    role = value;
+                else
+                    errorMessages += "\n ERROR: Role entered is invalid.";
             }
 
         }
+
+
 
         public DateTime CreationDate
         {
@@ -58,26 +122,62 @@ namespace Capstone_Final.Models
             }
             set
             {
-                creationDate = value;
+                if(GeneralTools.NullCheck(value))
+                    creationDate = value;
             }
         }
 
-        public string ErorMessages
+
+
+        public string Password
         {
             get
             {
-                return ErorMessages;
+                return password;
+            }
+            set
+            {
+                Passwords pass = new Passwords(value);
+
+                if (pass.StrongEnough() && GeneralTools.NotEmptyOrNull(value))
+                    password = value;
+                else
+                    errorMessages += pass.Errors;
             }
         }
 
-        public Users()
+
+
+        public string Salt
         {
-            id = 0;
-            name = "New Employee";
-            role = 1;
-            creationDate = DateTime.Today;
-            errorMessages = string.Empty;
+            get
+            {
+                return salt;
+            }
+            set
+            {
+                salt = value;
+            }
         }
 
+        public bool PasswordResetFlag
+        {
+            get
+            {
+                return passwordResetFlag;
+            }
+            set
+            {
+                passwordResetFlag = value;
+            }
+        }
+
+        public string ErrorMessages
+        {
+            get
+            {
+                return errorMessages;
+            }
+        }
     }
 }

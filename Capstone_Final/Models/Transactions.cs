@@ -13,6 +13,7 @@ namespace Capstone_Final.Models
         private double payment;
         private double originalJobCost;
         private double newJobCost;
+        private string errorMessages;
 
         public int TransactionID
         {
@@ -58,7 +59,10 @@ namespace Capstone_Final.Models
             }
             set
             {
-                payment = value;
+                if(GeneralTools.NotEmptyOrNull(value) && GeneralTools.DoubleCheck(value.ToString()))
+                    payment = value;
+                else
+                    errorMessages += "\n ERROR: Number is not a propr decimal number example: 5.96";
             }
         }
 
@@ -70,7 +74,10 @@ namespace Capstone_Final.Models
             }
             set
             {
-                originalJobCost = value;
+                if(GeneralTools.NotEmptyOrNull(value) && GeneralTools.DoubleCheck(value.ToString()))
+                    originalJobCost = value;
+                else
+                    errorMessages += "\n ERROR: Number is not a propr decimal number example: 5.96";
             }
         }
 
@@ -82,7 +89,18 @@ namespace Capstone_Final.Models
             }
             set
             {
-                newJobCost = value;
+                if(GeneralTools.NotEmptyOrNull(value))
+                    newJobCost = value;
+                else
+                    errorMessages += "\n ERROR: Number is not a propr decimal number example: 5.96";
+            }
+        }
+
+        public string ErrorMessages
+        {
+            get
+            {
+                return errorMessages;
             }
         }
     }

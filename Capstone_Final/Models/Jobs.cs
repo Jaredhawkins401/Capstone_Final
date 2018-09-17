@@ -9,11 +9,16 @@ namespace Capstone_Final.Models
     {
         private int jobID;
         private int customerID;
-        private string location;
+        private string street;
+        private string city;
+        private string state;
+        private string zip;
         private DateTime startDate;
         private DateTime estimatedCompletionDate;
         private DateTime completionDate;
         private double estimatedJobCost;
+        private double completedJobCost;
+        private string errorMessages;
 
         public int JobID
         {
@@ -35,20 +40,63 @@ namespace Capstone_Final.Models
             }
             set
             {
-                customerID = value;
+                    customerID = value;
             }
         }
 
-        public string Location
+        public string Street
         {
             get
             {
-                return location;
+                return street;
             }
-
             set
             {
-                location = value;
+                if (GeneralTools.NotEmptyOrNull(value))
+                    street = value;
+            }
+        }
+
+        public string City
+        {
+            get
+            {
+                return city;
+            }
+            set
+            {
+                if (GeneralTools.NotEmptyOrNull(value))
+                    city = value;
+            }
+        }
+
+        public string State
+        {
+            get
+            {
+                return state;
+            }
+            set
+            {
+                if (GeneralTools.NotEmptyOrNull(value) && GeneralTools.isState(value))
+                    state = value;
+                else
+                    errorMessages += "\n ERROR: State is incorrect, try again";
+            }
+        }
+
+        public string Zip
+        {
+            get
+            {
+                return zip;
+            }
+            set
+            {
+                if (GeneralTools.NotEmptyOrNull(value) && GeneralTools.isZip(value))
+                    zip = value;
+                else
+                    errorMessages += "\n ERROR: Not a correct zip, try again.";
             }
         }
 
@@ -60,7 +108,8 @@ namespace Capstone_Final.Models
             }
             set
             {
-                startDate = value;
+                if (GeneralTools.NullCheck(value))
+                    startDate = value;
             }
         }
 
@@ -72,7 +121,10 @@ namespace Capstone_Final.Models
             }
             set
             {
-                estimatedCompletionDate = value;
+                if (!GeneralTools.isPastDate(value) && GeneralTools.NullCheck(value))
+                    estimatedCompletionDate = value;
+                else
+                    errorMessages += "\n ERROR: Date cannot be a past date.";
             }
         }
 
@@ -84,7 +136,46 @@ namespace Capstone_Final.Models
             }
             set
             {
-                completionDate = value;
+                if (GeneralTools.NullCheck(value))
+                    completionDate = value;
+            }
+        }
+
+        public double EstimatedJobCost
+        {
+            get
+            {
+                return estimatedJobCost;
+            }
+            set
+            {
+                if (GeneralTools.NotEmptyOrNull(value))
+                    estimatedJobCost = value;
+                else
+                    errorMessages += "\n ERROR: Number is not a propr decimal number example: 5.96";
+            }
+        }
+
+        public double CompletedJobCost
+        {
+            get
+            {
+                return completedJobCost;
+            }
+            set
+            {
+                if (GeneralTools.NotEmptyOrNull(value))
+                    completedJobCost = value;
+                else
+                    errorMessages += "\n ERROR: Number is not a propr decimal number example: 5.96";
+            }
+        }
+
+        public string ErrorMessages
+        {
+            get
+            {
+                return errorMessages;
             }
         }
     }

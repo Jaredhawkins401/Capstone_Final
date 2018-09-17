@@ -7,22 +7,20 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Capstone_Final
-{
-
-
-    public partial class SiteMaster
-    {
-
+namespace Capstone_Final {
+    
+    
+    public partial class SiteMaster {
+        
         /// <summary>
-        /// HeadContent control.
+        /// userMain control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder HeadContent;
-
+        protected global::System.Web.UI.WebControls.HyperLink userMain;
+        
         /// <summary>
         /// MainContent control.
         /// </summary>

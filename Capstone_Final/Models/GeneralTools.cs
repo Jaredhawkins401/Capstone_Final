@@ -14,64 +14,74 @@ namespace Capstone_Final.Models
             Console.ReadKey();
         }
 
-        public static bool NotEmpty(int temp)
+        public static bool NullCheck(DateTime value)
         {
-            bool result = false;
-
-            if (temp > 0)
+            if (value != null)
             {
-                result = true;
+                return true;
             }
-
-            return result;
+            return false;
         }
 
-        public static bool NotEmpty(string temp)
-        {
-            bool not_empty = false;
+        public static bool NotEmptyOrNull(int value)
 
-            if (temp.Length > 0)
+        {
+            if (value > 0)
             {
-                not_empty = true;
+                return true;
             }
 
-            return not_empty;
+            return false;
         }
 
-        public static bool NotEmpty(int temp, int amount)
-        {
-            bool not_empty = false;
+        public static bool NotEmptyOrNull(double value)
 
-            if (temp >= amount)
+        {
+            if (value > 0)
             {
-                not_empty = true;
+                return true;
             }
 
-            return not_empty;
+            return false;
         }
 
-        public static bool NotEmpty(string temp, int length_desired)
+        public static bool NotEmptyOrNull(string value)
         {
-            bool not_empty = false;
-
-            if (temp.Length >= length_desired)
+            if (value.Length > 0 && value != null)
             {
-                not_empty = true;
+                return true;
             }
-
-            return not_empty;
+            return false;
         }
 
-        public static bool NotEmpty(double temp, int amount)
+        public static bool NotEmptyOrNull(int value, int amount)
         {
-            bool not_empty = false;
-
-            if (temp >= amount)
+            if (value >= amount)
             {
-                not_empty = true;
+                return true;
+            }
+            return false;
+        }
+
+        public static bool NotEmptyOrNull(string value, int requiredLength)
+        {
+            if (value.Length >= requiredLength && value != null)
+
+            {
+                return true;
+            }
+            return false;
+        }
+    
+
+        public static bool NotEmptyOrNull(double value, int amount)
+        {
+            if (value >= amount)
+            {
+                return true;
             }
 
-            return not_empty;
+            return false;
         }
 
 
@@ -93,14 +103,14 @@ namespace Capstone_Final.Models
             return is_number;
         }
 
-        public static bool ProfanityChecker(string temp)
+        public static bool ProfanityChecker(string value)
         {
             bool is_bad = false;
 
             string[] profanities = { "SHIT", "FUCK", "ASSHOLE", "NAZI", "69", "HITLER", "HIMMLER", "COCK", "DICK", "POOP" };
 
             foreach (string word in profanities)
-                if (temp.Contains(word))
+                if (value.Contains(word))
                 {
                     is_bad = true;
                 }
@@ -124,22 +134,22 @@ namespace Capstone_Final.Models
             }
         }
 
-        public static bool PhoneValidity(string temp)
+        public static bool PhoneValidity(string value)
         {
             var phone_reg = @"^[01]?[- .]?(\([2-9]\d{2}\)|[2-9]\d{2})[- .]?\d{3}[- .]?\d{4}$";
             var valid_phone = true;
             Regex reg = new Regex(phone_reg, RegexOptions.IgnoreCase | RegexOptions.Singleline);
-            if (!reg.Match(temp).Success)
+            if (!reg.Match(value).Success)
             {
                 valid_phone = false;
             }
             return valid_phone;
         }
 
-        public static bool isState(string temp)
+        public static bool isState(string value)
         {
             bool is_state = false;
-            temp = temp.ToUpper();
+            value = value.ToUpper();
             string[] state_list = {"AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL",
                                   "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA",
                                   "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE",
@@ -148,7 +158,7 @@ namespace Capstone_Final.Models
                                   "VA", "WA", "WV", "WI", "WY"};
 
             foreach (string state in state_list)
-                if (temp.Contains(state))
+                if (value.Contains(state))
                 {
                     is_state = true;
                 }
@@ -171,18 +181,20 @@ namespace Capstone_Final.Models
 
         public static bool isFutureDate(DateTime date)
         {
-            bool result;
-
             if (date <= DateTime.Now)
             {
-                result = false;
+                return false;
             }
-            else
-            {
-                result = true;
-            }
+            return true;
+        }
 
-            return result;
+        public static bool isPastDate(DateTime date)
+        {
+            if (date > DateTime.Now)
+            {
+                return false;
+            }
+            return false;
         }
     }
 }

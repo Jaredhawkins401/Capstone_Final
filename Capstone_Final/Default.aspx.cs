@@ -11,7 +11,14 @@ namespace Capstone_Final
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["LoggedIn"] != null && Session["LoggedIn"].ToString() == "TRUE")
+            {
+                Response.Redirect("~/Views/AJAXMain.aspx");
+            }
+            else
+            {
+                Response.Redirect("~/Views/Login.aspx");
+            }
         }
     }
 }
