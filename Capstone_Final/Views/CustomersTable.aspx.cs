@@ -28,7 +28,6 @@ namespace Capstone_Final.Views
 
                         //accountant
                         case 2:
-                            Response.Redirect("AJAXMain.aspx");
                             break;
 
                         //contractor
@@ -43,19 +42,12 @@ namespace Capstone_Final.Views
                     }
                 }
             }
-            if (Session["LoggedIn"] != null && Session["LoggedIn"].ToString() == "TRUE")
-            {
-
-            }
             else
-            {
                 Response.Redirect("Login.aspx");
-            }
         }
 
         protected void SearchButton_Click(object sender, EventArgs e)
         {
-
             DataSet ds = Database.SearchCustomers(searchBox.Text, columnBox.SelectedValue);
 
             customerView.AutoGenerateColumns = false;

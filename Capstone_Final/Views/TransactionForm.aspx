@@ -15,7 +15,7 @@
     <!-- Payment -->
     <asp:Label ID="paymentLabel" runat="server" Text="Payment" Style="display: block"></asp:Label>
     <asp:TextBox ID="paymentBox" runat="server" Style="display: block"></asp:TextBox>
-    <asp:CompareValidator ID="estimatedCostValid" runat="server" ControlToValidate="estimatedCostBox" Type="Currency"
+    <asp:CompareValidator ID="epaymentValid" runat="server" ControlToValidate="paymentBox" Type="Currency"
         Operator="DataTypeCheck" ErrorMessage="Value needs to be a dollar amount" />
     <asp:RequiredFieldValidator ID="paymentRequired" runat="server" ControlToValidate="paymentBox" ErrorMessage="Please enter a payment" />
 
@@ -24,7 +24,7 @@
     <asp:TextBox ID="originalCostBox" runat="server" Style="display: block"></asp:TextBox>
     <asp:CompareValidator ID="coriginalCostValid" runat="server" ControlToValidate="originalCostBox" Type="Currency"
         Operator="DataTypeCheck" ErrorMessage="Value needs to be a dollar amount" />
-    <asp:RequiredFieldValidator ID="originalJobRequired" runat="server" ControlToValidate="originalJobCostBox" ErrorMessage="Please enter in an original job cost" />
+    <asp:RequiredFieldValidator ID="originalJobRequired" runat="server" ControlToValidate="originalCostBox" ErrorMessage="Please enter in an original job cost" />
 
         <!-- New Job Cost -->
     <asp:Label ID="newJobCostLabel" runat="server" Text="New Job Cost" Style="display: block"></asp:Label>
@@ -34,13 +34,12 @@
     <asp:RequiredFieldValidator ID="newJobCostRequired" runat="server" ControlToValidate="newJobCostBox" ErrorMessage="Please enter a new job cost" />
    
 
-    <asp:Button ID="createButton" runat="server" Text="Create Job" OnClick="CreateButton_Click" />
-    <asp:Button ID="updateButton" runat="server" Text="Update Job" OnClick="UpdateButton_Click" />
-    <asp:Button ID="deleteButton" runat="server" Text="Delete Job" OnClick="DeleteButton_Click" />
+    <asp:Button ID="createButton" runat="server" Text="Create Transaction" OnClick="CreateButton_Click" />
+    <asp:Button ID="updateButton" runat="server" Text="Update Transaction" OnClick="UpdateButton_Click" />
+    <asp:Button ID="deleteButton" runat="server" Text="Delete Transaction" OnClick="DeleteButton_Click" />
 
-    <asp:Label ID="serverErrors" runat="server" Text="X"></asp:Label>
     <asp:ValidationSummary ID="vsMainAdd" runat="server" ShowMessageBox="True" ShowSummary="false"/>
-    <asp:Label ID="feedbackText" runat="server" Text="X"></asp:Label>
+    <asp:Label ID="feedbackText" runat="server" Text=""></asp:Label>
 
 
 

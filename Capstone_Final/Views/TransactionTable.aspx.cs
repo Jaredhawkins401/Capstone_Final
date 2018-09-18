@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using Capstone_Final.Views;
 
 namespace Capstone_Final.Views
 {
@@ -56,9 +57,9 @@ namespace Capstone_Final.Views
 
         protected void SearchButton_Click(object sender, EventArgs e)
         {
-
+            
             DataSet ds = Database.SearchTransactions(searchBox.Text, columnBox.SelectedValue);
-
+            
             transactionView.AutoGenerateColumns = false; 
             transactionView.DataSource = ds;
             transactionView.DataMember = ds.Tables[0].TableName;
@@ -66,3 +67,4 @@ namespace Capstone_Final.Views
         }
     }
 }
+

@@ -23,12 +23,21 @@ namespace Capstone_Final.Views
             Users user = new Users();
             string errors = string.Empty;
 
+
             Database.SearchUser(username, out user);
             if (Crypto.VerifyHashedPassword(user.Password, user.Salt + password))
             {
-                Session["LoggedIn"] = "TRUE";
-                Session["CurrentUser"] = user;
-                Response.Redirect("~/Views/AJAXMain.aspx");
+                if (user.PasswordResetFlag == true)
+                {
+                    Session["CurrentUser"] = user;
+                    Response.Redirect("PasswordReset.aspx");
+                }
+                else
+                {
+                    Session["LoggedIn"] = "TRUE";
+                    Session["CurrentUser"] = user;
+                    Response.Redirect("~/Views/AJAXMain.aspx");
+                }
             }
             else
             {

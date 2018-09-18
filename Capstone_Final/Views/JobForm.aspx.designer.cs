@@ -13,40 +13,13 @@ namespace Capstone_Final.Views {
     public partial class JobForm {
         
         /// <summary>
-        /// jobIDLabel control.
+        /// startDateLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label jobIDLabel;
-        
-        /// <summary>
-        /// jobIDBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label jobIDBox;
-        
-        /// <summary>
-        /// customerIDLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label customerIDLabel;
-        
-        /// <summary>
-        /// customerIDBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label customerIDBox;
+        protected global::System.Web.UI.WebControls.Label startDateLabel;
         
         /// <summary>
         /// startDatePicker control.
@@ -58,6 +31,15 @@ namespace Capstone_Final.Views {
         protected global::System.Web.UI.WebControls.Calendar startDatePicker;
         
         /// <summary>
+        /// estimatedDateLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label estimatedDateLabel;
+        
+        /// <summary>
         /// estimatedCompletionDatePicker control.
         /// </summary>
         /// <remarks>
@@ -65,6 +47,15 @@ namespace Capstone_Final.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Calendar estimatedCompletionDatePicker;
+        
+        /// <summary>
+        /// completionDateLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label completionDateLabel;
         
         /// <summary>
         /// completionDatePicker control.
@@ -274,6 +265,42 @@ namespace Capstone_Final.Views {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator zipRequiredValid;
         
         /// <summary>
+        /// customerIDLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label customerIDLabel;
+        
+        /// <summary>
+        /// customerIDBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label customerIDBox;
+        
+        /// <summary>
+        /// jobIDLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label jobIDLabel;
+        
+        /// <summary>
+        /// jobIDBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label jobIDBox;
+        
+        /// <summary>
         /// createButton control.
         /// </summary>
         /// <remarks>
@@ -299,15 +326,6 @@ namespace Capstone_Final.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button deleteButton;
-        
-        /// <summary>
-        /// serverErrors control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label serverErrors;
         
         /// <summary>
         /// vsMainAdd control.

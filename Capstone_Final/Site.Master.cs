@@ -15,6 +15,7 @@ namespace Capstone_Final
             if (Session["LoggedIn"] != null && Session["LoggedIn"].ToString() == "TRUE")
             {
                 logoutButton.Style["Visibility"] = "visible";
+
             }
         }
 

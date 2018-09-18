@@ -28,7 +28,6 @@ namespace Capstone_Final.Views
 
                         //accountant
                         case 2:
-                            Response.Redirect("AJAXMain.aspx");
                             break;
 
                         //contractor
@@ -67,16 +66,24 @@ namespace Capstone_Final.Views
                             emailBox.Text = customer.Email;
                         }
                     }
+                    else
+                    {
+                        createButton.Visible = true;
+                        updateButton.Visible = false;
+                        deleteButton.Visible = false;
+                    }
                 }
+                else
+                    Response.Redirect("Login.aspx");
             }
             else
-                Response.Redirect("LoginForm.aspx");
+                Response.Redirect("Login.aspx");
         }
 
         protected void CreateButton_Click(object sender, EventArgs e)
         {
             Users currentUser = (Users)Session["CurrentUser"];
-            if (currentUser.Role == Roles.Admin)
+            if (currentUser.Role == Roles.Admin || currentUser.Role == Roles.Accountant)
             {
                 Customers customer = new Customers();
 
@@ -104,7 +111,7 @@ namespace Capstone_Final.Views
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
             Users currentUser = (Users)Session["CurrentUser"];
-            if (currentUser.Role == Roles.Admin)
+            if (currentUser.Role == Roles.Admin || currentUser.Role == Roles.Accountant)
             {
                 Customers customer = new Customers();
 
@@ -126,7 +133,7 @@ namespace Capstone_Final.Views
         {
             Users currentUser = (Users)Session["CurrentUser"];
 
-            if (currentUser.Role == Roles.Admin)
+            if (currentUser.Role == Roles.Admin || currentUser.Role == Roles.Accountant)
                 feedbackText.Text = Database.DeleteCustomer(Convert.ToInt32(customerIDBox.Text));
         }
     }

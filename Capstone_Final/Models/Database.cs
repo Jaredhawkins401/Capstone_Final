@@ -28,7 +28,7 @@ namespace Capstone_Final.Models
             string attempt = string.Empty;
             string hashedPassword = string.Empty;
             user.Salt = Crypto.GenerateSalt();
-            string pass = Crypto.GenerateSalt();
+            user.Password = "Capstone1!";
 
 
             hashedPassword = Crypto.HashPassword(user.Salt + user.Password);
@@ -51,7 +51,7 @@ namespace Capstone_Final.Models
             comm.Parameters.AddWithValue("@salt", user.Salt);
             comm.Parameters.AddWithValue("@Role", user.Role);
             comm.Parameters.AddWithValue("@CreationDate", DateTime.Now);
-            comm.Parameters.AddWithValue("@passwordResetFlag", DBNull.Value);
+            comm.Parameters.AddWithValue("@passwordResetFlag", true);
             comm.Parameters.AddWithValue("@email", user.Email);
 
 
@@ -130,7 +130,60 @@ namespace Capstone_Final.Models
             userSet.Tables[0].Columns.Remove("salt");
             return userSet;
         }
-    
+
+        public static DataSet SearchUsers(string searchTerm, string column)
+        {
+            DataSet userSet = new DataSet();
+            Users user = new Users();
+            SqlCommand comm = new SqlCommand();
+
+            string SQLquery = "SELECT * FROM Users WHERE 0=0"; //query to grab people who match terms
+
+
+            if (searchTerm.Length > 0)
+            {
+                SQLquery += string.Format(" AND {0} LIKE @{1}", column, searchTerm);
+                comm.Parameters.AddWithValue(string.Format("@{0}", column), column);
+                comm.Parameters.AddWithValue(string.Format("@{0}", searchTerm), "%" + searchTerm + "%");
+            }
+
+
+
+            SqlConnection conn = new SqlConnection();
+            string conn_string = @ConnString();
+            conn.ConnectionString = conn_string;
+
+            comm.Connection = conn;
+            comm.CommandText = SQLquery;
+
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            adapter.SelectCommand = comm;
+
+            try
+            {
+                conn.Open();
+                adapter.Fill(userSet, "UserTemp"); //fill data set table with info
+                conn.Close();
+
+                foreach (DataRow row in userSet.Tables[0].Rows)
+                {
+                    user.FirstName = row["firstName"].ToString();
+                    user.LastName = row["lastName"].ToString();
+                    user.AccountName = row["accountName"].ToString();
+                    user.Password = row["password"].ToString();
+                    user.Salt = row["salt"].ToString();
+                    user.Role = (int)row["role"];
+                    user.CreationDate = (DateTime)row["creationDate"];
+                    user.UserID = (int)row["userID"];
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            userSet.Tables[0].Columns.Remove("password");
+            userSet.Tables[0].Columns.Remove("salt");
+            return userSet;
+        }
 
         public static string SearchUser(string accountName, out Users user)
         {
@@ -309,6 +362,7 @@ namespace Capstone_Final.Models
                     user.CreationDate = (DateTime)dr["creationDate"];
                     user.UserID = (int)dr["userID"];
                     user.PasswordResetFlag = (bool)dr["passwordResetFlag"];
+                    user.Email = dr["email"].ToString();
                 }
 
                 conn.Close();
@@ -496,9 +550,9 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += " AND @column LIKE @searchTerm";
-                comm.Parameters.AddWithValue("@column", column);
-                comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
+                SQLquery += string.Format(" AND {0} LIKE @{1}", column, searchTerm);
+                comm.Parameters.AddWithValue(string.Format("@{0}", column), column);
+                comm.Parameters.AddWithValue(string.Format("@{0}", searchTerm), "%" + searchTerm + "%");
             }
 
 
@@ -832,9 +886,9 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += " AND @column LIKE @searchTerm";
-                comm.Parameters.AddWithValue("@column", column);
-                comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
+                SQLquery += string.Format(" AND {0} LIKE @{1}", column, searchTerm);
+                comm.Parameters.AddWithValue(string.Format("@{0}", column), column);
+                comm.Parameters.AddWithValue(string.Format("@{0}", searchTerm), "%" + searchTerm + "%");
             }
 
 
@@ -1120,9 +1174,9 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += " AND @column LIKE @searchTerm";
-                comm.Parameters.AddWithValue("@column", column);
-                comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
+                SQLquery += string.Format(" AND {0} LIKE @{1}", column, searchTerm);
+                comm.Parameters.AddWithValue(string.Format("@{0}", column), column);
+                comm.Parameters.AddWithValue(string.Format("@{0}", searchTerm), "%" + searchTerm + "%");
             }
 
 

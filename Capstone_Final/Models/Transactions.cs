@@ -43,7 +43,7 @@ namespace Capstone_Final.Models
         {
             get
             {
-                return UserID;
+                return userID;
             }
             set
             {

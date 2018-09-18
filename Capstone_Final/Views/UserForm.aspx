@@ -43,8 +43,7 @@
     <asp:Button ID="updateButton" runat="server" Text="Update User" OnClick="UpdateButton_Click" />
     <asp:Button ID="deleteButton" runat="server" Text="Delete User" OnClick="DeleteButton_Click" />
 
-    <asp:Label ID="serverErrors" runat="server" Text="X"></asp:Label>
     <asp:ValidationSummary ID="vsMainAdd" runat="server" ShowMessageBox="True" ShowSummary="false"/>
-    <asp:Label ID="feedbackText" runat="server" Text="X"></asp:Label>
+    <asp:Label ID="feedbackText" runat="server" Text=""></asp:Label>
 </asp:Content>
 

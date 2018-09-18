@@ -85,13 +85,13 @@ namespace Capstone_Final.Views {
         protected global::System.Web.UI.WebControls.TextBox paymentBox;
         
         /// <summary>
-        /// estimatedCostValid control.
+        /// epaymentValid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator estimatedCostValid;
+        protected global::System.Web.UI.WebControls.CompareValidator epaymentValid;
         
         /// <summary>
         /// paymentRequired control.
@@ -200,15 +200,6 @@ namespace Capstone_Final.Views {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button deleteButton;
-        
-        /// <summary>
-        /// serverErrors control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label serverErrors;
         
         /// <summary>
         /// vsMainAdd control.

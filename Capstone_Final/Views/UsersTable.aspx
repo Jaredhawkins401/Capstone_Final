@@ -14,7 +14,7 @@
         <asp:ListItem Text="E-mail" Value="email"></asp:ListItem>
     </asp:DropDownList>
  
-        <asp:GridView ID="userView" runat="server" >
+        <asp:GridView ID="userView" runat="server" CssClass="table">
             <Columns>
                 <asp:BoundField DataField="accountName" HeaderText="Account Name" />
                 <asp:BoundField DataField="firstName" HeaderText="First Name" />

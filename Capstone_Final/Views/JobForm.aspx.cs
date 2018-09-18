@@ -41,8 +41,6 @@ namespace Capstone_Final.Views
                             break;
                     }
 
-
-
                     if ((!IsPostBack) && Request.QueryString["jobID"] != null)
                     {
                         if (Request.QueryString["jobID"] != null)
@@ -75,8 +73,18 @@ namespace Capstone_Final.Views
                     }
                     else if ((!IsPostBack) && Request.QueryString["customerID"] != null)
                     {
+                        createButton.Visible = true;
+                        updateButton.Visible = false;
+                        deleteButton.Visible = false;
                         string customerID = Request.QueryString["customerID"];
                         customerIDBox.Text = customerID;
+                    }
+                    else
+                    {
+                        createButton.Visible = true;
+                        updateButton.Visible = false;
+                        deleteButton.Visible = false;
+
                     }
                 }
                 else

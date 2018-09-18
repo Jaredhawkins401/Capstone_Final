@@ -26,6 +26,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -231,6 +232,7 @@
     <Content Include="Views\JobForm.aspx" />
     <Content Include="Views\JobsTable.aspx" />
     <Content Include="Views\Login.aspx" />
+    <Content Include="Views\PasswordReset.aspx" />
     <Content Include="Views\TransactionForm.aspx" />
     <Content Include="Views\TransactionTable.aspx" />
     <Content Include="Views\UserForm.aspx" />
@@ -348,6 +350,13 @@
     </Compile>
     <Compile Include="Views\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PasswordReset.aspx.cs">
+      <DependentUpon>PasswordReset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\PasswordReset.aspx.designer.cs">
+      <DependentUpon>PasswordReset.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\TransactionForm.aspx.cs">
       <DependentUpon>TransactionForm.aspx</DependentUpon>

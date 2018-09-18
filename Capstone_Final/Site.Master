@@ -51,7 +51,7 @@
                 </div>
                 <ul class="list-unstyled components">
                     <li class="active">
-                        <a href="AJAXMain.aspx" data-toggle="collapse" aria-expanded="false" >Home</a>
+                        <a href="AJAXMain.aspx" id="homeLink" >Home</a>
                     </li>
                     <li>
                        <!-- <asp:HyperLink ID="userMain" runat="server" data-toggle="collapse" aria-expanded="false" CssClass="dropdown-toggle">Users</asp:HyperLink> -->

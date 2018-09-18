@@ -74,8 +74,12 @@ namespace Capstone_Final.Views
                         emailBox.Text = user.Email;
                         roleBox.Text = user.Role.ToString();
                     }
-
-
+                }
+                else
+                {
+                    createButton.Visible = true;
+                    updateButton.Visible = false;
+                    deleteButton.Visible = false;
                 }
             }
             else
@@ -83,19 +87,6 @@ namespace Capstone_Final.Views
                 Response.Redirect("~/Views/Login.aspx");
             } 
         }
-        /*
-         *     private int userID;
-        private string firstName;
-        private string lastName;
-        private string accountName;
-        private string email;
-        private string password;
-        private string salt;
-        private int role;
-        private DateTime creationDate;
-        private bool passwordResetFlag;
-        private string errorMessages;
-         * */
 
         protected void CreateButton_Click(object sender, EventArgs e)
         {
@@ -109,6 +100,7 @@ namespace Capstone_Final.Views
                 user.AccountName = accountNameBox.Text;
                 user.Email = emailBox.Text ;
                 user.Role = int.Parse(roleBox.Text);
+                
 
                 if (!user.ErrorMessages.Contains("ERROR:"))
                 {
@@ -135,6 +127,9 @@ namespace Capstone_Final.Views
                 user.AccountName = accountNameBox.Text;
                 user.Email = emailBox.Text;
                 user.Role = int.Parse(roleBox.Text);
+
+                if (passwordResetBox.Checked)
+                    user.PasswordResetFlag = true;
 
                 if (!user.ErrorMessages.Contains("ERROR:"))
                     feedbackText.Text = Database.UpdateUser(user);

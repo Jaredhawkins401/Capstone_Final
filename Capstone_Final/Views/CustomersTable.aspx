@@ -15,8 +15,6 @@
         <asp:ListItem Text="E-mail" Value="email"></asp:ListItem>
     </asp:DropDownList>
 
-    <asp:Label ID="Label4" runat="server" Text="Job" style="display:block"></asp:Label>
-    <asp:TextBox ID="jobBox" runat="server"></asp:TextBox>
     <asp:GridView ID="customerView" runat="server" CssClass="table">
         <Columns>
             <asp:BoundField DataField="firstName" HeaderText="First Name" />

@@ -17,7 +17,7 @@ namespace Capstone_Final.Views
                 if (Session["CurrentUser"] != null)
                 {
                     Users currentUser = (Users)Session["CurrentUser"];
-
+                    userIDBox.Text = currentUser.UserID.ToString();
                     //redirect users without permissions
                     switch (currentUser.Role)
                     {
@@ -70,20 +70,26 @@ namespace Capstone_Final.Views
                             newJobCostBox.Text = transaction.NewJobCost.ToString();
                         }
                     }
-                    else if(Request.QueryString["jobID"] != null)
+                    else if (Request.QueryString["jobID"] != null)
                     {
+                        createButton.Visible = true;
+                        updateButton.Visible = false;
+                        deleteButton.Visible = false;
                         Jobs job = new Jobs();
                         feedbackText.Text = Database.LocateJob(Convert.ToInt32(Request.QueryString["jobID"]), out job);
-
+                        jobIDBox.Text = job.JobID.ToString();
                         Session["CurrentJob"] = job;
                     }
-                }
-
-                else
-                {
-                    Response.Redirect("Login.aspx");
+                    else
+                    {
+                        createButton.Visible = true;
+                        updateButton.Visible = false;
+                        deleteButton.Visible = false;
+                    }
                 }
             }
+            else
+                Response.Redirect("Login.aspx");
         }
 
         protected void CreateButton_Click(object sender, EventArgs e)

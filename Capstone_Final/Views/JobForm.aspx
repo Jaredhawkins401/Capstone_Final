@@ -48,8 +48,7 @@
 
     <!-- Zip -->
     <asp:Label ID="zipLabel" runat="server" Text="Zip Code" style="display:block"></asp:Label>
-    <asp:TextBox ID="zipBox" runat="server" style="display:block" MaxLength="5"></asp:TextBox><a href="CustomersTable.aspx">CustomersTable.aspx</a>
-    <asp:RegularExpressionValidator ID="zipValid" runat="server" ControlToValidate="zipBox"
+    <asp:TextBox ID="zipBox" runat="server" style="display:block" MaxLength="5"></asp:TextBox>&nbsp;<asp:RegularExpressionValidator ID="zipValid" runat="server" ControlToValidate="zipBox"
         ValidationExpression="^[0-9]{5}(?:-[0-9]{4})?$" ErrorMessage="Zip is not correct"/>
     <asp:RequiredFieldValidator ID="zipRequiredValid" runat="server" ControlToValidate="zipBox" ErrorMessage="Zip Code needs to be filled" />
 
@@ -64,8 +63,8 @@
     <asp:Button ID="deleteButton" runat="server" Text="Delete Job" OnClick="DeleteButton_Click" />
 
 
-    <asp:Label ID="serverErrors" runat="server" Text="X"></asp:Label>
+
     <asp:ValidationSummary ID="vsMainAdd" runat="server" ShowMessageBox="True" ShowSummary="false"/>
-    <asp:Label ID="feedbackText" runat="server" Text="X"></asp:Label>
+    <asp:Label ID="feedbackText" runat="server" Text=""></asp:Label>
 
 </asp:Content>

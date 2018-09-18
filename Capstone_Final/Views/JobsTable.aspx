@@ -15,10 +15,9 @@
         <asp:ListItem Text="City" Value="city"></asp:ListItem>
         <asp:ListItem Text="State" Value="state"></asp:ListItem>
         <asp:ListItem Text="Zip" Value="zip"></asp:ListItem>
-        <asp:ListItem Text="E-mail" Value="email"></asp:ListItem>
     </asp:DropDownList>
 
-        <asp:GridView ID="jobView" runat="server" >
+        <asp:GridView ID="jobView" runat="server" CssClass="table">
             <Columns>
                 <asp:BoundField DataField="startDate" HeaderText="Start Date" dataformatstring="{0:MMMM d, yyyy}" htmlencode="false"/>
                 <asp:BoundField DataField="estimatedCompletionDate" HeaderText="Estimated Completion Date" dataformatstring="{0:MMMM d, yyyy}" htmlencode="false" />
@@ -29,9 +28,9 @@
                 <asp:BoundField DataField="city" HeaderText="City" />
                 <asp:BoundField DataField="state" HeaderText="State" />
                 <asp:BoundField DataField="zip" HeaderText="zip" />
-                <asp:BoundField DataField="email" HeaderText="E-mail" />
+
                 
-                <asp:HyperLinkField DataNavigateUrlFields="jobID" DataNavigateUrlFormatString="JobsForm.aspx?jobID={0}" Text="Edit" />
+                <asp:HyperLinkField DataNavigateUrlFields="jobID" DataNavigateUrlFormatString="JobForm.aspx?jobID={0}" Text="Edit" />
                 <asp:HyperLinkField DataNavigateUrlFields="jobID" DataNavigateUrlFormatString="TransactionForm.aspx?jobID={0}" Text="Create Transaction" />
             </Columns>
         </asp:GridView>

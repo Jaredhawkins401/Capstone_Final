@@ -42,7 +42,7 @@
     <asp:RequiredFieldValidator ID="zipRequiredValid" runat="server" ControlToValidate="zipBox" ErrorMessage="Zip Code needs to be filled" />
 
     <!-- Email Text Box -->
-    <asp:Label ID="emailLabel" runat="server" Text="E-mail" Style="display: block"></asp:Label>
+        <asp:Label ID="emailLabel" runat="server" Text="E-mail" Style="display: block;"></asp:Label>
     <asp:TextBox ID="emailBox" runat="server" Style="display: block" MaxLength="20"></asp:TextBox>
     <asp:RequiredFieldValidator ID="emailValid" runat="server" ControlToValidate="emailBox" ErrorMessage="E-mail is required" />
 
@@ -50,7 +50,7 @@
     <asp:Button ID="updateButton" runat="server" Text="Update Customer" OnClick="UpdateButton_Click" />
     <asp:Button ID="deleteButton" runat="server" Text="Delete Customer" OnClick="DeleteButton_Click" />
 
-    <asp:Label ID="serverErrors" runat="server" Text="X"></asp:Label>
+
     <asp:ValidationSummary ID="vsMainAdd" runat="server" ShowMessageBox="True" ShowSummary="false"/>
-    <asp:Label ID="feedbackText" runat="server" Text="X"></asp:Label>
+    <asp:Label ID="feedbackText" runat="server" Text=""></asp:Label>
 </asp:Content>
