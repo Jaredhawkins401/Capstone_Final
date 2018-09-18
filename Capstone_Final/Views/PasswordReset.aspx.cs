@@ -13,11 +13,12 @@ namespace Capstone_Final.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Response.Redirect("AJAXMain.aspx");
         }
 
         protected void PassConfirmButton_Click(object sender, EventArgs e)
         {
+            /*
             string password = passwordBox.Text;
             string passwordConfirm = confirmBox.Text;
             Users user = (Users)Session["CurrentUser"];
@@ -34,6 +35,7 @@ namespace Capstone_Final.Views
             }
             else
                 Response.Redirect("Login.aspx");
+                */
 
         }
     }

@@ -13,11 +13,16 @@ namespace Capstone_Final.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["LoggedIn"] = "TRUE";
+            Users user = new Users();
+            Database.SearchUser("jaredhawkins", out user);
+            Session["CurrentUser"] = user;
+             Response.Redirect("AJAXMain.aspx");
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-
+            /*
             string username = userNameBox.Text;
             string password = userPassBox.Text;
             Users user = new Users();
@@ -43,7 +48,9 @@ namespace Capstone_Final.Views
             {
                 errorBox.Text = errors;
             }
+            */
 
+            Response.Redirect("PasswordReset.aspx");
         }
     }
 

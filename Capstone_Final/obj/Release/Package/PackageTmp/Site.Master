@@ -1,0 +1,123 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Capstone_Final.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Collapsible sidebar using Bootstrap 4</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="~/Content/style.css" type="text/css" runat="server"/>
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+
+
+    <form runat="server">
+      
+     <!--<script type="text/x-jquery-tmpl" charset="utf-8">-->
+        <script type="text/javascript">
+         $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                console.log("works");
+                $('#sidebar').toggleClass("active");
+            });
+        });
+    </script>
+        <div class="wrapper">
+            
+            <nav id="sidebar" class="active">
+                <div class="sidebar-header">
+                    <h3>AJAX</h3>
+                </div>
+                <ul class="list-unstyled components">
+                    <li class="active">
+                        <a href="AJAXMain.aspx" id="homeLink" >Home</a>
+                    </li>
+                    <li>
+                       <!-- <asp:HyperLink ID="userMain" runat="server" data-toggle="collapse" aria-expanded="false" CssClass="dropdown-toggle">Users</asp:HyperLink> -->
+                            <a href="#usersSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Users</a> 
+                            <ul class="collapse list-unstyled" style="background-color:#D0D9EB;" id="usersSubmenu">
+                                <li>
+                                    <a href="UserForm.aspx">Create User</a>
+                                </li>
+                                <li>
+                                    <a href="UsersTable.aspx">User Table</a>
+                                </li>
+                            </ul>
+
+                    </li>
+                    <li>
+                        <a href="#customerSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Customers</a>
+                        <ul class="collapse list-unstyled" id="customerSubmenu">
+                            <li>
+                                <a href="CustomerForm.aspx">Create Customer</a>
+                            </li>
+                            <li>
+                                <a href="CustomersTable.aspx">Customer Table</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li >
+                        <a href="#jobsSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Jobs</a>
+                        <ul class="collapse list-unstyled" id="jobsSubmenu">
+                            <li>
+                                <a href="TransactionTable.aspx">Transactions Table</a>
+                            </li>
+                            <li>
+                                <a href="JobsTable.aspx">Jobs Table</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </nav>
+
+            <div id="content-wrapper">
+            
+                <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="margin-left:0px;">
+                    <asp:Button ID="logoutButton" runat="server" Text="Log Out" style="visibility:hidden;float:right;"  CausesValidation="false" OnClick="Logout_Click" />
+                    <div class="container-fluid" style="float:left;">
+                        <button type="button" id="sidebarCollapse" class="btn btn-info" style="margin-left:0px;">
+                            <i class="fas fa-align-left"></i>
+                            <span>Toggle Sidebar</span>
+                        </button>
+                    </div>
+                </nav>
+                <div id="page-content-wrapper">
+                    <div id="page-content">
+                    <asp:ContentPlaceHolder id="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+            </footer>
+
+    </form>
+
+</body>
+</html>
