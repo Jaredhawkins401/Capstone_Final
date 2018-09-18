@@ -1,17 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="JobForm.aspx.cs" Inherits="Capstone_Final.Views.JobForm" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <asp:Label ID="jobIDLabel" runat="server" Text="Job ID"></asp:Label>
-    <asp:Label ID="jobIDBox" runat="server" Text=""></asp:Label>
 
-    <asp:Label ID="customerIDLabel" runat="server" Text="Customer ID"></asp:Label>
-    <asp:Label ID="customerIDBox" runat="server" Text=""></asp:Label>
 
-    <asp:Calendar ID="startDatePicker" runat="server"></asp:Calendar>
 
-    <asp:Calendar ID="estimatedCompletionDatePicker" runat="server"></asp:Calendar>
 
-    <asp:Calendar ID="completionDatePicker" runat="server"></asp:Calendar>
+    <div class="calendar-wrapper">
+        <div class="calendar-left"><asp:Label ID="startDateLabel" runat="server" Text="Start Date"></asp:Label>  <asp:Calendar  ID="startDatePicker" runat="server"></asp:Calendar></div>
+        <div class="calendar-middle"><asp:Label ID="estimatedDateLabel" runat="server" Text="Estimated Completion Date"></asp:Label><asp:Calendar ID="estimatedCompletionDatePicker" runat="server"></asp:Calendar></div>
+        <div class="calendar-right"><asp:Label ID="completionDateLabel" runat="server" Text="Completion Job Cost"></asp:Label><asp:Calendar ID="completionDatePicker" runat="server"></asp:Calendar></div>
+    </div>
+        
+    
 
     <!-- Estimated Job Cost -->
     <asp:Label ID="estimatedJobCostLabel" runat="server" Text="Estimated Job Cost" Style="display: block"></asp:Label>
@@ -53,6 +53,11 @@
         ValidationExpression="^[0-9]{5}(?:-[0-9]{4})?$" ErrorMessage="Zip is not correct"/>
     <asp:RequiredFieldValidator ID="zipRequiredValid" runat="server" ControlToValidate="zipBox" ErrorMessage="Zip Code needs to be filled" />
 
+    <asp:Label ID="customerIDLabel" runat="server" Text="Customer ID" style="display:block"></asp:Label>
+    <asp:Label ID="customerIDBox" runat="server" Text="" style="display:block"></asp:Label>
+
+    <asp:Label ID="jobIDLabel" runat="server" Text="Job ID" style="display:block"></asp:Label>
+    <asp:Label ID="jobIDBox" runat="server" Text="" style="display:block"></asp:Label>
 
     <asp:Button ID="createButton" runat="server" Text="Create Job" OnClick="CreateButton_Click" />
     <asp:Button ID="updateButton" runat="server" Text="Update Job" OnClick="UpdateButton_Click" />

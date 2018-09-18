@@ -51,7 +51,7 @@
                 </div>
                 <ul class="list-unstyled components">
                     <li class="active">
-                        <a href="AJAXMain.aspx" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                        <a href="AJAXMain.aspx" data-toggle="collapse" aria-expanded="false" >Home</a>
                     </li>
                     <li>
                        <!-- <asp:HyperLink ID="userMain" runat="server" data-toggle="collapse" aria-expanded="false" CssClass="dropdown-toggle">Users</asp:HyperLink> -->
@@ -93,10 +93,11 @@
             </nav>
 
             <div id="content-wrapper">
-            <asp:Button ID="logoutButton" runat="server" Text="Log Out" style="visibility:hidden"  CausesValidation="false" OnClick="Logout_Click" />
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="container-fluid">
-                        <button type="button" id="sidebarCollapse" class="btn btn-info">
+            
+                <nav class="navbar navbar-expand-lg navbar-light bg-dark" style="margin-left:0px;">
+                    <asp:Button ID="logoutButton" runat="server" Text="Log Out" style="visibility:hidden;float:right;"  CausesValidation="false" OnClick="Logout_Click" />
+                    <div class="container-fluid" style="float:left;">
+                        <button type="button" id="sidebarCollapse" class="btn btn-info" style="margin-left:0px;">
                             <i class="fas fa-align-left"></i>
                             <span>Toggle Sidebar</span>
                         </button>

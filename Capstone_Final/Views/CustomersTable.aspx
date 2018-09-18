@@ -17,7 +17,7 @@
 
     <asp:Label ID="Label4" runat="server" Text="Job" style="display:block"></asp:Label>
     <asp:TextBox ID="jobBox" runat="server"></asp:TextBox>
-    <asp:GridView ID="customerView" runat="server" >
+    <asp:GridView ID="customerView" runat="server" CssClass="table">
         <Columns>
             <asp:BoundField DataField="firstName" HeaderText="First Name" />
             <asp:BoundField DataField="lastName" HeaderText="Last Name" />
