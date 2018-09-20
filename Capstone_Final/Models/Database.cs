@@ -132,7 +132,7 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += " AND @column LIKE @searchTerm";
+                SQLquery += string.Format(" AND {0} LIKE @searchTerm", column);
                 comm.Parameters.AddWithValue("@column", column);
                 comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
             }
@@ -187,7 +187,7 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += " AND @column LIKE @searchTerm";
+                SQLquery += string.Format(" AND {0} LIKE @searchTerm", column);
                 comm.Parameters.AddWithValue("@column", column);
                 comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
             }
@@ -298,7 +298,7 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += " AND @column LIKE @searchTerm";
+                SQLquery += string.Format(" AND {0} LIKE @searchTerm", column);
                 comm.Parameters.AddWithValue("@column", column);
                 comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
             }
@@ -702,7 +702,7 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += " AND @column LIKE @searchTerm";
+                SQLquery += string.Format(" AND {0} LIKE @searchTerm", column);
                 comm.Parameters.AddWithValue("@column", column);
                 comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
             }
@@ -754,7 +754,7 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += " AND @column LIKE @searchTerm";
+                SQLquery += string.Format(" AND {0} LIKE @searchTerm", column);
                 comm.Parameters.AddWithValue("@column", column);
                 comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
             }
@@ -805,7 +805,7 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += " AND @column LIKE @searchTerm";
+                SQLquery += string.Format(" AND {0} LIKE @searchTerm", column);
                 comm.Parameters.AddWithValue("@column", column);
                 comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
             }
@@ -1039,7 +1039,7 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += " AND @column LIKE @searchTerm";
+                SQLquery += string.Format(" AND {0} LIKE @searchTerm", column);
                 comm.Parameters.AddWithValue("@column", column);
                 comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
             }
@@ -1133,7 +1133,7 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += " AND @column LIKE @searchTerm";
+                SQLquery += string.Format(" AND {0} LIKE @searchTerm", column);
                 comm.Parameters.AddWithValue("@column", column);
                 comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
             }
@@ -1365,7 +1365,7 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += " AND @column LIKE @searchTerm";
+                SQLquery += string.Format(" AND {0} LIKE @searchTerm", column);
                 comm.Parameters.AddWithValue("@column", column);
                 comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
             }
@@ -1415,7 +1415,7 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += " AND @column LIKE @searchTerm";
+                SQLquery += string.Format(" AND {0} LIKE @searchTerm", column);
                 comm.Parameters.AddWithValue("@column", column);
                 comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
             }
