@@ -98,6 +98,7 @@ namespace Capstone_Final.Views
                 if(!customer.ErrorMessages.Contains("ERROR:"))
                 {
                     feedbackText.Text = Database.AddCustomer(customer);
+                    Response.Redirect("AJAXMain.aspx");
                 }
                 else
                 {
@@ -121,11 +122,11 @@ namespace Capstone_Final.Views
                 customer.City = cityBox.Text;
                 customer.State = stateBox.Text;
                 customer.Zip = zipBox.Text;
-                customer.Email = emailBox.Text;
-                customer.CustomerID = Convert.ToInt32(customerIDBox);
+                customer.Email = emailBox.Text;;
 
                 feedbackText.Text = Database.UpdateCustomer(customer);
 
+                Response.Redirect("AJAXMain.aspx");
             } 
         }
 
@@ -134,7 +135,10 @@ namespace Capstone_Final.Views
             Users currentUser = (Users)Session["CurrentUser"];
 
             if (currentUser.Role == Roles.Admin || currentUser.Role == Roles.Accountant)
+            {
                 feedbackText.Text = Database.DeleteCustomer(Convert.ToInt32(customerIDBox.Text));
+                Response.Redirect("AJAXMain.aspx");
+            }
         }
     }
 }

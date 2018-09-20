@@ -7,9 +7,6 @@
 
     <asp:Label ID="columnLabel" runat="server" Text="Column to Search" Style="display: block"></asp:Label>
     <asp:DropDownList ID="columnBox" runat="server">
-        <asp:ListItem Text="Payment" Value="payment"></asp:ListItem>
-        <asp:ListItem Text="Original Job Cost" Value="originalJobCost"></asp:ListItem>
-        <asp:ListItem Text="New Job Cost" Value="newJobCost"></asp:ListItem>
     </asp:DropDownList>
 
         <asp:GridView ID="transactionView" runat="server" CssClass="table">

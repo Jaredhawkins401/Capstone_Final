@@ -147,7 +147,10 @@ namespace Capstone_Final.Views
                 job.CompletedJobCost = double.Parse(completedCostBox.Text);
 
                 if (!job.ErrorMessages.Contains("ERROR:"))
+                {
                     feedbackText.Text = Database.UpdateJob(job);
+                    Response.Redirect("AJAXMain.aspx");
+                }
                 else
                     feedbackText.Text = job.ErrorMessages;
             }
@@ -158,7 +161,10 @@ namespace Capstone_Final.Views
             Users currentUser = (Users)Session["CurrentUser"];
 
             if (currentUser.Role == Roles.Admin)
+            {
                 feedbackText.Text = Database.DeleteJob(Convert.ToInt32(jobIDBox.Text));
+                Response.Redirect("AJAXMain.aspx");
+            }
         }
     }
 }

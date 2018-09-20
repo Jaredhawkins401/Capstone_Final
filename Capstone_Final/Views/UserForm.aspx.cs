@@ -132,7 +132,10 @@ namespace Capstone_Final.Views
                     user.PasswordResetFlag = true;
 
                 if (!user.ErrorMessages.Contains("ERROR:"))
+                {
                     feedbackText.Text = Database.UpdateUser(user);
+                    Response.Redirect("AJAXMain.aspx");
+                }
                 else
                     feedbackText.Text = user.ErrorMessages;
             }
@@ -143,7 +146,11 @@ namespace Capstone_Final.Views
             Users currentUser = (Users)Session["CurrentUser"];
 
             if (currentUser.Role == Roles.Admin)
+            {
                 feedbackText.Text = Database.DeleteUser(Convert.ToInt32(userIDBox.Text));
+                Response.Redirect("AJAXMain.aspx");
+            }
         }
+
     }
 }

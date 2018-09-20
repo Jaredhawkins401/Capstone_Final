@@ -5,14 +5,8 @@
     <asp:TextBox ID="searchBox" runat="server" style="display:block"></asp:TextBox>
 
     <asp:Label ID="columnLabel" runat="server" Text="Column to Search" Style="display: block"></asp:Label>
-    <asp:DropDownList ID="columnBox" runat="server">
-        <asp:ListItem Text="First Name" Value="firstName"></asp:ListItem>
-        <asp:ListItem Text="Last Name" Value="lastName"></asp:ListItem>
-        <asp:ListItem Text="Street" Value="street"></asp:ListItem>
-        <asp:ListItem Text="City" Value="city"></asp:ListItem>
-        <asp:ListItem Text="State" Value="state"></asp:ListItem>
-        <asp:ListItem Text="Zip" Value="zip"></asp:ListItem>
-        <asp:ListItem Text="E-mail" Value="email"></asp:ListItem>
+    <asp:DropDownList ID="columnBox"  runat="server">
+
     </asp:DropDownList>
 
     <asp:GridView ID="customerView" runat="server" CssClass="table">

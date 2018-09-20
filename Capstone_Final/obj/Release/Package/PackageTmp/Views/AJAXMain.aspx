@@ -3,37 +3,39 @@
     <div id="stats-wrapper">
         <div id="Stat1">
             <div class="stat1statistic">
-                25%
+         <asp:Label ID="stat1" runat="server" CssClass="" Text=""></asp:Label>
             </div>
             <div class="statHeader">
                 Job Completion Estimate Accuracy
             </div>
             <div class="statText">
-                Our jobs are completed 25% longer than our estimate.
+                <asp:Label ID="statTextBox" runat="server" Text=""></asp:Label>
+
             </div>
         </div>
 
         <div id="Stat2">
             <div class="stat2statistic">
-                15%
+                <asp:Label ID="stat2" runat="server" CssClass="" Text=""></asp:Label>
             </div>
             <div class="statHeader">
                 Job Cost Esimate Accuracy
             </div>
             <div class="statText">
-                Our jobs are costing 15% more than our initial estimates.
+            <asp:Label ID="jobPercent" runat="server" Text="" CssClass=""></asp:Label>
+
             </div>
         </div>
 
         <div id="Stat3">
             <div class="stat3statistic">
-                8
+                <asp:Label ID="stat3" runat="server" CssClass="stat3statistic" Text=""></asp:Label>
             </div>
             <div class="statHeader">
                 New Customers
             </div>
             <div class="statText">
-                We have received 8 new customer inquiries in the last 60 days.
+               <asp:Label ID="customersTotal" runat="server" Text=""></asp:Label>
             </div>
         </div>
     </div>

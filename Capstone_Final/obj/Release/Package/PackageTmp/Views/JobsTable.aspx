@@ -6,15 +6,6 @@
 
     <asp:Label ID="columnLabel" runat="server" Text="Column to Search" Style="display: block"></asp:Label>
     <asp:DropDownList ID="columnBox" runat="server">
-        <asp:ListItem Text="Start Date" Value="startDate"></asp:ListItem>
-        <asp:ListItem Text="Estimated Completion Date" Value="estimatedCompletionDate"></asp:ListItem>
-        <asp:ListItem Text="Completion Date" Value="completionDate"></asp:ListItem>
-        <asp:ListItem Text="Estimated Job Cost" Value="estimatedJobCost"></asp:ListItem>
-        <asp:ListItem Text="Completed Job Cost" Value="completedJobCost"></asp:ListItem>
-        <asp:ListItem Text="Street" Value="street"></asp:ListItem>
-        <asp:ListItem Text="City" Value="city"></asp:ListItem>
-        <asp:ListItem Text="State" Value="state"></asp:ListItem>
-        <asp:ListItem Text="Zip" Value="zip"></asp:ListItem>
     </asp:DropDownList>
 
         <asp:GridView ID="jobView" runat="server" CssClass="table">

@@ -37,7 +37,7 @@ namespace Capstone_Final.Models
 
             conn.ConnectionString = ConnString();
 
-            string sqlString = "INSERT INTO Users (firstName, lastName, accountName, password, salt, role, creationDate, passwordResetFlag, email) VALUES (@firstName, @lastName, @accountName, @password, @salt, @role, @creationDate, @passwordResetFlag, @email)"; //SQL insert
+            string sqlString = "INSERT INTO Users (userID, firstName, lastName, accountName, password, salt, role, creationDate, passwordResetFlag, email) VALUES((SELECT COALESCE(MAX(userID),0) +1 as 'NextUserID' from Users), @firstName, @lastName, @accountName, @password, @salt, @role, @creationDate, @passwordResetFlag, @email)"; //SQL insert
 
             SqlCommand comm = new SqlCommand();
             comm.CommandText = sqlString;
@@ -76,7 +76,52 @@ namespace Capstone_Final.Models
             return attempt;
         }
 
-        public static DataSet SearchUser(string searchTerm, string column)
+        public static int UsersLast60Days()
+        {
+            DataSet userSet = new DataSet();
+            Users user = new Users();
+            SqlCommand comm = new SqlCommand();
+
+            string SQLquery = "SELECT * FROM Users"; //query to grab people who match terms
+
+
+            SQLquery += string.Format(" WHERE creationDate BETWEEN '{0}' AND '{1}';", DateTime.Now.AddMonths(-2), DateTime.Now);
+
+          
+
+
+
+            SqlConnection conn = new SqlConnection();
+            string conn_string = @ConnString();
+            conn.ConnectionString = conn_string;
+
+            comm.Connection = conn;
+            comm.CommandText = SQLquery;
+
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            adapter.SelectCommand = comm;
+            int count = 0;
+
+            try
+            {
+
+                conn.Open();
+                adapter.Fill(userSet, "UserTemp"); //fill data set table with info
+                conn.Close();
+
+                foreach (DataRow row in userSet.Tables[0].Rows)
+                {
+                    count++;
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return count;
+        }
+
+            public static DataSet SearchUser(string searchTerm, string column)
         {
             DataSet userSet = new DataSet();
             Users user = new Users();
@@ -87,10 +132,9 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += string.Format(" AND {0} = @{1}", column, searchTerm);
-
-
-                comm.Parameters.AddWithValue(string.Format("@{0}", searchTerm), searchTerm); //adding names to search to narrow down results
+                SQLquery += " AND @column LIKE @searchTerm";
+                comm.Parameters.AddWithValue("@column", column);
+                comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
             }
 
 
@@ -121,6 +165,7 @@ namespace Capstone_Final.Models
                     user.Role = (int)row["role"];
                     user.CreationDate = (DateTime)row["creationDate"];
                     user.UserID = (int)row["userID"];
+                    user.Email = row["email"].ToString();
                 }
             }
             catch (Exception ex)
@@ -142,9 +187,9 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += string.Format(" AND {0} LIKE @{1}", column, searchTerm);
-                comm.Parameters.AddWithValue(string.Format("@{0}", column), column);
-                comm.Parameters.AddWithValue(string.Format("@{0}", searchTerm), "%" + searchTerm + "%");
+                SQLquery += " AND @column LIKE @searchTerm";
+                comm.Parameters.AddWithValue("@column", column);
+                comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
             }
 
 
@@ -175,6 +220,7 @@ namespace Capstone_Final.Models
                     user.Role = (int)row["role"];
                     user.CreationDate = (DateTime)row["creationDate"];
                     user.UserID = (int)row["userID"];
+                    user.Email = row["email"].ToString();
                 }
             }
             catch (Exception ex)
@@ -227,9 +273,11 @@ namespace Capstone_Final.Models
                     user.Role = (int)row["role"];
                     user.CreationDate = (DateTime)row["creationDate"];
                     user.UserID = (int)row["userID"];
+                    user.PasswordResetFlag = (bool)row["passwordResetFlag"];
+                    user.Email = row["email"].ToString();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return ex.ToString();
             }
@@ -250,10 +298,9 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery = string.Format(" AND {0} = @{1}", column, searchTerm);
-
-                
-                comm.Parameters.AddWithValue(string.Format("@{0}", searchTerm), searchTerm); //adding names to search to narrow down results
+                SQLquery += " AND @column LIKE @searchTerm";
+                comm.Parameters.AddWithValue("@column", column);
+                comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
             }
 
 
@@ -284,6 +331,7 @@ namespace Capstone_Final.Models
                     user.Role = (int)row["role"];
                     user.CreationDate = (DateTime)row["creationDate"];
                     user.UserID = (int)row["userID"];
+                    user.Email = row["email"].ToString();
                 }
             }
             catch (Exception ex)
@@ -322,12 +370,54 @@ namespace Capstone_Final.Models
                 pass = (string)comm.ExecuteScalar();
                 conn.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return ex.ToString();
             }
 
             return pass;
+        }
+
+        public static string ResetPassword(string accountName)
+        {
+
+            SqlCommand comm = new SqlCommand();
+            SqlConnection conn = new SqlConnection();
+            conn.ConnectionString = ConnString();
+            comm.Connection = conn;
+            Users user = new Users();
+            Database.SearchUser(accountName, out user);
+
+            string sqlQuery = "UPDATE password FROM Users WHERE 0=0";
+            user.Password = "Capstone1!";
+            user.Password = Crypto.HashPassword(user.Password);
+            user.Salt = Crypto.GenerateSalt();
+
+            if (accountName.Length > 0)
+            {
+                sqlQuery += " AND accountName = @accountName";
+                comm.Parameters.AddWithValue("@accountName", accountName);
+                sqlQuery += " SET password = @password";
+                comm.Parameters.AddWithValue("@password", user.Salt + user.Password);
+                
+
+
+            }
+
+           string result = comm.CommandText = sqlQuery;
+
+            try
+            {
+                conn.Open();
+                comm.ExecuteScalar();
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+
+            return result;
         }
 
         public static string LocateUser(int userID, out Users user)
@@ -367,7 +457,7 @@ namespace Capstone_Final.Models
 
                 conn.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return ex.ToString();
             }
@@ -383,10 +473,10 @@ namespace Capstone_Final.Models
             SqlConnection conn = new SqlConnection();
             SqlCommand comm = new SqlCommand();
             Int32 record = 0;
-            string sqlCommand = "UPDATE Users Set password = @password, salt = @salt";
+            string sqlCommand = "UPDATE Users Set password = @password, salt = @salt WHERE userID = @userID";
             string result = string.Empty;
             user.Salt = Crypto.GenerateSalt();
-            user.Password = Crypto.HashPassword(newPassword + user.Salt);
+            user.Password = Crypto.HashPassword(user.Salt + newPassword);
 
             conn.ConnectionString = ConnString();
             comm.CommandText = sqlCommand;
@@ -394,6 +484,7 @@ namespace Capstone_Final.Models
 
             comm.Parameters.AddWithValue("@salt", user.Salt);
             comm.Parameters.AddWithValue("@password", user.Password);
+            comm.Parameters.AddWithValue("@userID", user.UserID);
 
             try
             {
@@ -417,8 +508,8 @@ namespace Capstone_Final.Models
         {
             Int32 record = 0;
             string result = string.Empty;
-            string sqlCommand = "UPDATE Users SET firstName = @firstName, lastName = @lastName, role = @role, passwordResetFlag = @passwordResetFlag, email = @email";
- 
+            string sqlCommand = "UPDATE Users SET firstName = @firstName, lastName = @lastName, role = @role, passwordResetFlag = @passwordResetFlag, email = @email WHERE userID = @userID;";
+
             SqlConnection conn = new SqlConnection();
 
             conn.ConnectionString = ConnString();
@@ -427,11 +518,16 @@ namespace Capstone_Final.Models
 
             comm.CommandText = sqlCommand;
             comm.Connection = conn;
-
+         
             comm.Parameters.AddWithValue("@firstName", user.FirstName);
             comm.Parameters.AddWithValue("@lastName", user.LastName);
             comm.Parameters.AddWithValue("@role", user.Role);
-            comm.Parameters.AddWithValue("@passwordResetFlag", user.PasswordResetFlag);
+            comm.Parameters.AddWithValue("@userID", user.UserID);
+
+            if (user.PasswordResetFlag == true)
+                comm.Parameters.AddWithValue("@passwordResetFlag", 1);
+            else if (user.PasswordResetFlag == false)
+                comm.Parameters.AddWithValue("@passwordResetFlag", 0);
             comm.Parameters.AddWithValue("@email", user.Email);
 
             try
@@ -451,6 +547,62 @@ namespace Capstone_Final.Models
 
             return result;
         }
+
+        public static string UpdateUserWithPassword(Users user)
+        {
+            Int32 record = 0;
+            string result = string.Empty;
+            string sqlCommand = "UPDATE Users SET accountName = @accountName, firstName = @firstName, lastName = @lastName, role = @role, passwordResetFlag = @passwordResetFlag, email = @email, password = @password, salt = @salt WHERE userID = @userID;";
+
+            SqlConnection conn = new SqlConnection();
+
+            conn.ConnectionString = ConnString();
+
+            SqlCommand comm = new SqlCommand();
+
+            comm.CommandText = sqlCommand;
+            comm.Connection = conn;
+
+            comm.Parameters.AddWithValue("@firstName", user.FirstName);
+            comm.Parameters.AddWithValue("@lastName", user.LastName);
+            comm.Parameters.AddWithValue("@role", user.Role);
+            comm.Parameters.AddWithValue("@userID", user.UserID);
+            comm.Parameters.AddWithValue("@accountName", user.AccountName);
+
+
+            user.Salt = Crypto.GenerateSalt();
+            user.Password = "Capstone1!";
+
+
+            user.Password = Crypto.HashPassword(user.Salt + user.Password);
+
+            comm.Parameters.AddWithValue("@password", user.Password);
+            comm.Parameters.AddWithValue("@salt", user.Salt);
+
+            if (user.PasswordResetFlag == true)
+                comm.Parameters.AddWithValue("@passwordResetFlag", 1);
+            else if (user.PasswordResetFlag == false)
+                comm.Parameters.AddWithValue("@passwordResetFlag", 0);
+            comm.Parameters.AddWithValue("@email", user.Email);
+
+            try
+            {
+                conn.Open();
+                record = comm.ExecuteNonQuery();
+                result = record.ToString() + " Records updated";
+            }
+            catch (Exception err)
+            {
+                result = "ERROR: " + err.Message;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
+        }
+
 
 
         public static string DeleteUser(int userID)
@@ -501,7 +653,7 @@ namespace Capstone_Final.Models
 
             conn.ConnectionString = ConnString();
 
-            string sqlString = "INSERT INTO Customers (firstName, lastName, street, city, state, zip, email) VALUES (@firstName, @lastName, @street, @city, @state, @zip, @email)"; //SQL insert
+            string sqlString = "INSERT INTO Customers (customerID, firstName, lastName, street, city, state, zip, email) VALUES((SELECT COALESCE(MAX(customerID),0) +1 as 'NextCustomerID' from Customers), @firstName, @lastName, @street, @city, @state, @zip, @email)"; //SQL insert
 
             SqlCommand comm = new SqlCommand();
             comm.CommandText = sqlString;
@@ -550,9 +702,9 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += string.Format(" AND {0} LIKE @{1}", column, searchTerm);
-                comm.Parameters.AddWithValue(string.Format("@{0}", column), column);
-                comm.Parameters.AddWithValue(string.Format("@{0}", searchTerm), "%" + searchTerm + "%");
+                SQLquery += " AND @column LIKE @searchTerm";
+                comm.Parameters.AddWithValue("@column", column);
+                comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
             }
 
 
@@ -586,7 +738,7 @@ namespace Capstone_Final.Models
             }
             catch (Exception ex)
             {
-                
+
             }
 
             return customerSet;
@@ -698,7 +850,7 @@ namespace Capstone_Final.Models
                 return "ERROR: Customer was not found or is empty";
         }
 
- 
+
         public static string LocateCustomer(int customerID, out Customers customer)
         {
             SqlConnection conn = new SqlConnection();
@@ -837,7 +989,8 @@ namespace Capstone_Final.Models
 
             conn.ConnectionString = ConnString();
 
-            string sqlString = "INSERT INTO Jobs (jobID, customerID, street, city, state, zip, startDate, estimatedCompletionDate, completionDate, estimatedJobCost, completedJobCost) VALUES (@jobID, @customerID, @street, @city, @state, @zip, @startDate, @estimatedCompletionDate, @completionDate, @estimatedJobCost, @completedJobCost)"; //SQL insert
+
+            string sqlString = "INSERT INTO Jobs (jobID, customerID, street, city, state, zip, startDate, estimatedCompletionDate, completionDate, estimatedJobCost, completedJobCost) VALUES((SELECT COALESCE(MAX(jobID),0) +1 as 'NextJobID' from Jobs), @customerID, @street, @city, @state, @zip, @startDate, @estimatedCompletionDate, @completionDate, @estimatedJobCost, @completedJobCost)"; //SQL insert
 
             SqlCommand comm = new SqlCommand();
             comm.CommandText = sqlString;
@@ -886,9 +1039,9 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += string.Format(" AND {0} LIKE @{1}", column, searchTerm);
-                comm.Parameters.AddWithValue(string.Format("@{0}", column), column);
-                comm.Parameters.AddWithValue(string.Format("@{0}", searchTerm), "%" + searchTerm + "%");
+                SQLquery += " AND @column LIKE @searchTerm";
+                comm.Parameters.AddWithValue("@column", column);
+                comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
             }
 
 
@@ -931,6 +1084,44 @@ namespace Capstone_Final.Models
 
             return jobSet;
         }
+
+        public static DataSet GetAllJobs()
+        {
+            DataSet jobSet = new DataSet();
+            Jobs job = new Jobs();
+            SqlCommand comm = new SqlCommand();
+
+            string SQLquery = "SELECT * FROM Jobs WHERE 0=0";
+
+
+
+
+
+            SqlConnection conn = new SqlConnection();
+
+            string conn_string = @ConnString();
+            conn.ConnectionString = conn_string;
+
+            comm.Connection = conn;
+            comm.CommandText = SQLquery;
+
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            adapter.SelectCommand = comm;
+
+            try
+            {
+                conn.Open();
+                adapter.Fill(jobSet, "jobTemp"); //fill data set table with info
+                conn.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return jobSet;
+        }
+    
+
 
         public static string SearchJob(string searchTerm, string column, out Jobs job)
         {
@@ -976,6 +1167,7 @@ namespace Capstone_Final.Models
                     job.Zip = row["zip"].ToString();
                     job.StartDate = (DateTime)row["startDate"];
                     job.EstimatedCompletionDate = (DateTime)row["estimatedCompletionDate"];
+                    job.CompletionDate = (DateTime)row["completionDate"];
                     job.EstimatedJobCost = (double)row["estimatedJobCost"];
                     job.CompletedJobCost = (double)row["completedJobCost"];
                 }
@@ -1130,14 +1322,13 @@ namespace Capstone_Final.Models
 
             conn.ConnectionString = ConnString();
 
-            string sql_string = "INSERT INTO Transactions (transactionID, jobID, userID, payment, originalJobCost, newJobCost) VALUES (@transactionID, @jobID, @userID, @payment, @originalJobCost, @newJobCost)"; //SQL insert
+            string sql_string = "INSERT INTO Transactions (transactionID, jobID, userID, payment, originalJobCost, newJobCost) VALUES((SELECT COALESCE(MAX(transactionID),0) +1 as 'NexttransactionID' from Transactions), @jobID, @userID, @payment, @originalJobCost, @newJobCost)"; //SQL insert
 
             SqlCommand comm = new SqlCommand();
             comm.CommandText = sql_string;
             comm.Connection = conn;
 
 
-            comm.Parameters.AddWithValue("@transactionID", transaction.TransactionID);
             comm.Parameters.AddWithValue("@jobID", transaction.JobID);
             comm.Parameters.AddWithValue("@userID", transaction.UserID);
             comm.Parameters.AddWithValue("@payment", transaction.Payment);
@@ -1174,9 +1365,9 @@ namespace Capstone_Final.Models
 
             if (searchTerm.Length > 0)
             {
-                SQLquery += string.Format(" AND {0} LIKE @{1}", column, searchTerm);
-                comm.Parameters.AddWithValue(string.Format("@{0}", column), column);
-                comm.Parameters.AddWithValue(string.Format("@{0}", searchTerm), "%" + searchTerm + "%");
+                SQLquery += " AND @column LIKE @searchTerm";
+                comm.Parameters.AddWithValue("@column", column);
+                comm.Parameters.AddWithValue("@searchTerm", "%" + searchTerm + "%"); //adding names to search to narrow down results
             }
 
 
@@ -1382,6 +1573,8 @@ namespace Capstone_Final.Models
             return result;
         }
         #endregion
+
+
 
     }
 }

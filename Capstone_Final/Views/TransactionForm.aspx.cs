@@ -96,7 +96,7 @@ namespace Capstone_Final.Views
         {
             Users currentUser = (Users)Session["CurrentUser"];
             Jobs currentJob = (Jobs)Session["CurrentJob"];
-            if (currentUser.Role == Roles.Admin)
+            if (currentUser.Role == Roles.Admin || currentUser.Role == Roles.Accountant)
             {
                 Transactions transaction = new Transactions();
 
@@ -121,7 +121,7 @@ namespace Capstone_Final.Views
         protected void UpdateButton_Click(object sender, EventArgs e)
         {
             Users currentUser = (Users)Session["CurrentUser"];
-            if (currentUser.Role == Roles.Admin)
+            if (currentUser.Role == Roles.Admin || currentUser.Role == Roles.Accountant)
             {
                 Transactions transaction = new Transactions();
 
@@ -133,7 +133,10 @@ namespace Capstone_Final.Views
                 transaction.NewJobCost = Convert.ToDouble(newJobCostBox.Text);
 
                 if (!transaction.ErrorMessages.Contains("ERROR:"))
+                {
                     feedbackText.Text = Database.UpdateTransaction(transaction);
+                    Response.Redirect("AJAXMain.aspx");
+                }
 
                 else
                     feedbackText.Text = transaction.ErrorMessages;
@@ -144,8 +147,11 @@ namespace Capstone_Final.Views
         {
             Users currentUser = (Users)Session["CurrentUser"];
 
-            if (currentUser.Role == Roles.Admin)
+            if (currentUser.Role == Roles.Admin || currentUser.Role == Roles.Accountant)
+            {
                 feedbackText.Text = Database.DeleteTransaction(Convert.ToInt32(transactionIDBox.Text));
+                Response.Redirect("AJAXMain.aspx");
+            }
         }
     }
 }

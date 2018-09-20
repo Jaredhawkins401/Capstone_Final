@@ -166,13 +166,13 @@ a[data-toggle="collapse"] {
     text-align:center;
     margin-bottom:15px;
 }
-.stat1statistic{
+.green{
     color:green;
 }
-.stat2statistic{
+.red{
     color:red;
 }
-.stat3statistic{
+.yellow{
     color:#F5D410;
 }
 .statHeader{

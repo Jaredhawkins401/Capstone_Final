@@ -13,23 +13,19 @@ namespace Capstone_Final.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["LoggedIn"] = "TRUE";
-            Users user = new Users();
-            Database.SearchUser("jaredhawkins", out user);
-            Session["CurrentUser"] = user;
-             Response.Redirect("AJAXMain.aspx");
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            /*
-            string username = userNameBox.Text;
+
+            string userName = userNameBox.Text;
             string password = userPassBox.Text;
             Users user = new Users();
             string errors = string.Empty;
 
 
-            Database.SearchUser(username, out user);
+            Database.SearchUser(userName, out user);
+
             if (Crypto.VerifyHashedPassword(user.Password, user.Salt + password))
             {
                 if (user.PasswordResetFlag == true)
@@ -46,12 +42,9 @@ namespace Capstone_Final.Views
             }
             else
             {
-                errorBox.Text = errors;
-            }
-            */
 
-            Response.Redirect("PasswordReset.aspx");
+
+            }
         }
     }
-
 }

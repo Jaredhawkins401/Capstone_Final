@@ -41,12 +41,20 @@ namespace Capstone_Final.Views
                         case 4:
                             Response.Redirect("AJAXMain.aspx");
                             break;
+
+                        
+                    }
+
+                    DataSet ds = Database.SearchJob("jobID", "0");
+
+                    if (columnBox.DataMember.Length <= 0)
+                    {
+                        foreach (DataColumn column in ds.Tables[0].Columns)
+                        {
+                            columnBox.Items.Add(new ListItem(column.ToString(), column.ToString()));
+                        }
                     }
                 }
-            }
-            if (Session["LoggedIn"] != null && Session["LoggedIn"].ToString() == "TRUE")
-            {
-
             }
             else
             {

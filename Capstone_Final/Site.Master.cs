@@ -10,6 +10,7 @@ namespace Capstone_Final
 {
     public partial class SiteMaster : MasterPage
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["LoggedIn"] != null && Session["LoggedIn"].ToString() == "TRUE")

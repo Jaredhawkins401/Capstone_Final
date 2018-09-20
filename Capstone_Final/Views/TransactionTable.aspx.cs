@@ -43,11 +43,17 @@ namespace Capstone_Final.Views
                             Response.Redirect("AJAXMain.aspx");
                             break;
                     }
-                }
-            }
-            if (Session["LoggedIn"] != null && Session["LoggedIn"].ToString() == "TRUE")
-            {
 
+                    DataSet ds = Database.SearchTransactions("transactionID", "0");
+
+                    if (columnBox.DataMember.Length <= 0)
+                    {
+                        foreach (DataColumn column in ds.Tables[0].Columns)
+                        {
+                            columnBox.Items.Add(new ListItem(column.ToString(), column.ToString()));
+                        }
+                    }
+                }
             }
             else
             {
